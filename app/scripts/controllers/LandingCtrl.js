@@ -1,5 +1,6 @@
  (function() {
      function LandingCtrl() {
+         console.log("in landings");
          this.heroTitle = "Turn the Music Up!";
      }
  
