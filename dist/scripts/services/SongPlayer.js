@@ -1,5 +1,6 @@
 (function() {
     function SongPlayer(Fixtures) {
+        var ctrlScope;
         /**
         * @desc player object provide public functions for services
         * @type {Object}
@@ -37,7 +38,8 @@
             
             currentBuzzObject.bind('timeupdate', function() {
                     player.currentTime = currentBuzzObject.getTime();
-                    player.callBackMethod();
+                    //player.callBackMethod();
+                    ctrlScope.$apply(function(){console.log("apply");});
             });
 
             player.currentSong = song;
@@ -177,7 +179,15 @@
          * @function callBackMethod
          * @desc Abstract method created to be overriden in controller to have callback to controller
          */
-        player.callBackMethod = function(){};
+        //player.callBackMethod = function(){};
+        
+        /**
+         * @function setCtrlScope
+         * @desc Abstract method created to be overriden in controller to have callback to controller
+         */
+        player.setCtrlScope = function(scope){
+            ctrlScope = scope;
+        };
           
         return player;
     }
