@@ -1,5 +1,5 @@
 (function() {
-    function SongPlayer($rootScope, Fixtures) {
+    function SongPlayer(Fixtures) {
         /**
         * @desc player object provide public functions for services
         * @type {Object}
@@ -36,9 +36,8 @@
             });
             
             currentBuzzObject.bind('timeupdate', function() {
-                $rootScope.$apply(function() {
                     player.currentTime = currentBuzzObject.getTime();
-                });
+                    player.callBackMethod();
             });
 
             player.currentSong = song;
@@ -173,11 +172,17 @@
                  currentBuzzObject.setVolume(vol);
              }
          };
+        
+        /**
+         * @function callBackMethod
+         * @desc Abstract method created to be overriden in controller to have callback to controller
+         */
+        player.callBackMethod = function(){};
           
         return player;
     }
  
      angular
          .module('blocJams')
-         .factory('SongPlayer', ['$rootScope', 'Fixtures', SongPlayer]);
+         .factory('SongPlayer', ['Fixtures', SongPlayer]);
  })();
